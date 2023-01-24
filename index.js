@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 // const res = require("express/lib/response");
 const mongoose = require("mongoose");
 
@@ -11,6 +12,9 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(cors({
+    origin: '*'
+}));
 const PORT = process.env.PORT || 3000;
 
 // rotas
