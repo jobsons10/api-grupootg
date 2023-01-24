@@ -11,7 +11,7 @@ app.use(
   })
 );
 app.use(express.json());
-
+const PORT = process.env.PORT || 3000;
 
 // rotas
 const userRoutes = require("./routes/userRoutes")
@@ -41,6 +41,6 @@ mongoose
   )
   .then(() => {
     console.log("Connected to mongodb");
-    app.listen(3000);
+    app.listen(PORT);
   })
   .catch((err) => console.log(err));
