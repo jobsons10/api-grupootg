@@ -3,28 +3,35 @@ const Award = require('../models/Award');
 
 router.get('/', async (req, res) => {
     try {
-        const awards = await Award.find()
-        res.status(200).json({awards})
+        const award = await Award.find()
+        res.status(200).json({award})
+    } catch (error) {
+        res.status(500).json({error: error});
+    }
+})
+
+router.get('/:name', async (req, res) => {
+    const name = req.params.name
+    try {
+        const award = await Award.findOne({name: name})
+        res.status(200).json({award})
     } catch (error) {
         res.status(500).json({error: error});
     }
 })
 
 
-router.post('/', async (req, res) => {
-    const { name, type, amount } = req.body
-    if (!name || !type || !amount) {
-        res.status(400).json({error: 'Name, type and amount are required'})
-    }
-    const award = {
-        name,
-        type,
-        amount
+router.patch('/:name', async (req, res) => {
+    const name = req.params.name;
+    const amount = req.body
+    if (!amount) {
+        res.status(400).json({error: 'Amount are required'})
+        return
     }
 
     try {
-        await Award.create(award);
-        res.status(201).json({award})
+        await Award.updateOne({name: name}, {amount: amount});
+        res.status(201).json({"message": 'Amount successfully updated'})
     } catch (error) {
         res.status(500).json({error: error});
     }

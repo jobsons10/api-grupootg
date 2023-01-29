@@ -25,15 +25,31 @@ router.post("/", async (req, res) => {
   });
   
 // READ USER
-router.get("/", async (req, res) => {
+router.get("/:email", async (req, res) => {
+    const email = req.params.email
     try {
-        const users = await User.find()
+        const user = await User.findOne({email: email});
 
-        res.status(200).json(users);
+        res.status(200).json(user);
     } catch (error) {
         res.status(500).json({ error: error });
     }
 })
+
+// UPDATE USER
+router.patch("/:email", async (req, res) => {
+  const email = req.params.email
+
+  const chances = req.body.chances
+  try {
+    const updatedUser = await User.updateOne({email: email}, {chances: chances});
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+})
+
 
 
 module.exports = router;
