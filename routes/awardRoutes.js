@@ -23,7 +23,7 @@ router.get('/:name', async (req, res) => {
 
 router.patch('/:name', async (req, res) => {
     const name = req.params.name;
-    const amount = req.body
+    const amount = req.body.amount
     if (!amount) {
         res.status(400).json({error: 'Amount are required'})
         return

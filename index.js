@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 
 const app = express();
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:5500");
+  res.header("Access-Control-Allow-Origin", "https://www.googleapis.com");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
