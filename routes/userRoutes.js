@@ -41,8 +41,9 @@ router.patch("/:email", async (req, res) => {
   const email = req.params.email
 
   const chances = req.body.chances
+  const award = req.body.award
   try {
-    const updatedUser = await User.updateOne({email: email}, {chances: chances});
+    const updatedUser = await User.updateOne({email: email}, {chances: chances, award: award});
 
     res.status(200).json(updatedUser);
   } catch (error) {
